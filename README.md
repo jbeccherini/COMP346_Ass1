@@ -1,1 +1,1 @@
-# COMP346_Ass1
+# COMP346_Assignments
