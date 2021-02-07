@@ -9,7 +9,7 @@
  *
  * @author Kerly Titus
  */
-public class Network {
+public class Network extends Thread{
     
     private static int maxNbPackets;                           /* Maximum number of simultaneous transactions handled by the network buffer */
     private static int inputIndexClient, inputIndexServer, outputIndexServer, outputIndexClient;                   /* Network buffer indices for accessing the input buffer (inputIndexClient, outputIndexServer) and output buffer (inputIndexServer, outputIndexClient) */
@@ -401,7 +401,7 @@ public class Network {
             setoutputIndexClient(((getoutputIndexClient( ) + 1) % getMaxNbPackets( ))); /* Increment the output buffer index for the client */
             /* Check if output buffer is empty */
             if ( getoutputIndexClient( ) == getinputIndexServer( ))
-            {	
+            {
             	setOutBufferStatus("empty");
             
             	System.out.println("\n DEBUG : Network.receive() - outGoingBuffer status " + getOutBufferStatus());
@@ -553,10 +553,30 @@ public class Network {
     public void run()
     {	
     	System.out.println("\n DEBUG : Network.run() - starting network thread");
-    	
-    	while (true)
+
+    	connect(getClientIP());
+    	connect(getServerIP());
+
+    	//receive();
+        int i = 0;
+    	while (!clientConnectionStatus.equals("disconnected"))
     	{
-		/* Implement the code for the run method */
+		 /* Implement the code for the run method */
+            Thread.yield();
+
+            //receive(inComingPacket[getinputIndexClient()]);
+
+            transferIn(inComingPacket[getinputIndexServer()]);
+
+
+
+            //buffer Status -> yield if full or empty
+
+
+
+            //check to see if the client threads are still connected
     	}    
     }
+
 }
+

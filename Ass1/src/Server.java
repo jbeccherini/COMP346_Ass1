@@ -15,7 +15,7 @@ import java.util.InputMismatchException;
  * @author Kerly Titus
  */
 
-public class Server {
+public class Server extends Thread{
   
 	int numberOfTransactions;         /* Number of transactions handled by the server */
 	int numberOfAccounts;             /* Number of accounts stored in the server */
@@ -190,9 +190,9 @@ public class Server {
          double newBalance; 		/* Updated account balance */
               
          /* Process the accounts until the client disconnects */
-         while ((!objNetwork.getClientConnectionStatus().equals("disconnected")))
+         while ((!objNetwork.getClientConnectionStatus().equals("disconnected"))) //&
          { 
-        	 /* while( (objNetwork.getInBufferStatus().equals("empty"))); */  /* Alternatively, busy-wait until the network input buffer is available */
+        	 /* while( (objNetwork.getInBufferStatus().equals("empty"))); */  /* Alternatively, busy-wait until the network input buffer is available */ //
         	 
         	 if (!objNetwork.getInBufferStatus().equals("empty"))
         	 {
@@ -307,12 +307,20 @@ public class Server {
      * @param
      */
     public void run()
-    {   Transactions trans = new Transactions();
+    {   /* Implement the code for the run method */
+        initializeAccounts();
+
+        Transactions trans = new Transactions(); //check this later
+
     	long serverStartTime = 0, serverEndTime = 0;
 
+        objNetwork.transferIn(trans);
+
     	System.out.println("\n DEBUG : Server.run() - starting server thread " + objNetwork.getServerConnectionStatus());
-    	
-    	/* Implement the code for the run method */
+
+        processTransactions(trans);  //not sure if this works
+
+        objNetwork.transferOut(trans); // not sure if this works
         
         System.out.println("\n Terminating server thread - " + " Running time " + (serverEndTime - serverStartTime) + " milliseconds");
            
