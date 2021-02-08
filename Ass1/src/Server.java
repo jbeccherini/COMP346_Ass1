@@ -233,7 +233,7 @@ public class Server extends Thread {
 
         System.out.println("\n DEBUG : Server.processTransactions() - " + getNumberOfTransactions() + " accounts updated");
 
-        if (objNetwork.disconnect(objNetwork.getServerIP())) System.out.println("DISCONNECTED SERVER"); // never runs
+        if (objNetwork.disconnect(objNetwork.getServerIP())) System.out.println("DISCONNECTED SERVER");
 
         return true;
     }
@@ -307,6 +307,11 @@ public class Server extends Thread {
         System.out.println("\n DEBUG : Server.run() - starting server thread " + objNetwork.getServerConnectionStatus());
 
         processTransactions(trans); // calls transferIn and transferOut
+
+//        if(!objNetwork.getServerConnectionStatus().equals("disconnected")){
+//            objNetwork.disconnect(objNetwork.getServerIP());
+//            System.out.println("DISCONNECTED SERVER SAFETY");
+//        }
 
         System.out.println("\n Terminating server thread - " + " Running time " + (serverEndTime - serverStartTime) + " milliseconds");
 
