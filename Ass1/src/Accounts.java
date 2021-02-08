@@ -149,7 +149,7 @@ public class Accounts {
 	*/
 	public String toString() 
 	{
-		return ("\n Account number " + getAccountNumber() + "Account type " + getAccountType() + "First name " + getFirstName() + "Last Name " + getLastName() + "Balance " + getBalance());
+		return ("\n Account number " + getAccountNumber() + " Account type " + getAccountType() + " First name " + getFirstName() + " Last Name " + getLastName() + " Balance " + getBalance());
 	}
     
 }
