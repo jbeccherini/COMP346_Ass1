@@ -557,24 +557,32 @@ public class Network extends Thread{
     	connect(getClientIP());
     	connect(getServerIP());
 
+
     	//receive();
         int i = 0;
-    	while (!clientConnectionStatus.equals("disconnected"))
+    	while (true)
     	{
 		 /* Implement the code for the run method */
             Thread.yield();
 
             //receive(inComingPacket[getinputIndexClient()]);
 
-            transferIn(inComingPacket[getinputIndexServer()]);
+            //transferIn(inComingPacket[getinputIndexServer()]);
+
 
 
 
             //buffer Status -> yield if full or empty
 
-
+            //System.out.println("client :" + clientConnectionStatus + " server :" + serverConnectionStatus);
 
             //check to see if the client threads are still connected
+            if(clientConnectionStatus.equals("disconnected") && serverConnectionStatus.equals("disconnected"))
+            {
+                System.out.println("hi");
+                break;
+            }
+
     	}    
     }
 

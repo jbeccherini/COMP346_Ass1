@@ -225,8 +225,11 @@ public class Client extends Thread{
         if(Thread.currentThread().getName().equals("receiving"))
         {
             System.out.println("Recieving thread started ");
-            receiveTransactions(transaction[objNetwork.getoutputIndexClient()]); //check index client / server
+            receiveTransactions(transact); //check index client / server
         }
+        Thread.yield();
+        //objNetwork.disconnect(objNetwork.getClientIP());
+
 
     }
 }
